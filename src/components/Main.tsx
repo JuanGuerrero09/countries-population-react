@@ -1,5 +1,4 @@
 import React from "react";
-import CardOne from "./Cards/CardOne";
 import Card from "./Card";
 import countryOne from "../mocks/countryOne.json";
 import countryTwo from "../mocks/countryTwo.json";
