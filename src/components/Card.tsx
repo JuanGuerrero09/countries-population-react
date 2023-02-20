@@ -1,50 +1,67 @@
-import React from "react";
 import {
   Card as CardEl,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Stack,
   Heading,
-  Divider,
   Button,
   ButtonGroup,
   Text,
   Image,
 } from "@chakra-ui/react";
-import countryOne from "../mocks/countryOne.json";
+import { GameContext } from "../context/GameContext";
+import { useContext } from "react";
 import { getCountries } from "../services/countries";
+type InnerValuesParams = {
+  value?: number | string;
+  valueType: string;
+};
 
-const InnerOne = () => {
-  const { name, population, area } = countryOne;
+const InnerOne = ({ value, valueType }: InnerValuesParams) => {
   return (
     <div className="textCard flex flex-col items-center font-semibold">
       <Text color="blue.600" fontSize="3xl">
-        {population}
+        {value}
       </Text>
-      <Text fontSize="xl">Habitants</Text>
+      <Text fontSize="xl">{valueType}</Text>
     </div>
   );
 };
-const InnerTwo = () => {
-  const { name, population, area } = countryOne;
+const InnerTwo = ({ valueType }: InnerValuesParams) => {
+  const { handleQuestion } = useContext(GameContext);
   return (
     <div className="textCard flex flex-col items-center font-semibold">
       <ButtonGroup spacing="2">
-        <Button variant="solid" colorScheme="blue">
+        <Button
+          value="less"
+          onClick={handleQuestion}
+          variant="solid"
+          colorScheme="blue"
+        >
           Less
         </Button>
-        <Button variant="solid" colorScheme="blue">
+        <Button
+          value="more"
+          onClick={handleQuestion}
+          variant="solid"
+          colorScheme="blue"
+        >
           More
         </Button>
       </ButtonGroup>
-      <Text fontSize="xl">Habitants</Text>
+      <Text fontSize="xl">{valueType}</Text>
     </div>
   );
 };
 
 export default function Card({ country, type }: any) {
-  const { name, population, area, continents, flags } = country;
+  const { name, flags } = country;
+  const { question } = useContext(GameContext);
+  const value = country[question];
+  let valueType = "";
+  if (question === "area") {
+    valueType = "km2 of territory";
+  }
+  if (question === "population") {
+    valueType = "Habitants";
+  }
   return (
     <>
       <CardEl
@@ -60,7 +77,11 @@ export default function Card({ country, type }: any) {
           Has
         </Text>
         <Image src={flags.svg} alt={flags.alt} borderRadius="lg" />
-        {type === "one" ? <InnerOne /> : <InnerTwo />}
+        {type === "one" ? (
+          <InnerOne value={value} valueType={valueType} />
+        ) : (
+          <InnerTwo valueType={valueType} />
+        )}
       </CardEl>
     </>
   );
