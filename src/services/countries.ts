@@ -1,6 +1,6 @@
 const COUNTRY_ROUTES = 'https://restcountries.com/v3.1/all'
 
-type CountryResponse = {
+export type CountryResponseProps = {
     name: string,
     population: number,
     area: number,
@@ -11,12 +11,12 @@ type CountryResponse = {
 }
 
 export async function getCountries () {
-    const allCountries:CountryResponse[] = []
+    const allCountries:CountryResponseProps[] = []
     try {
         const response = await fetch(COUNTRY_ROUTES)
         const responseData = await response.json()
         await responseData.map((country:any):any => {
-            const newCountry:CountryResponse = {
+            const newCountry:CountryResponseProps = {
                 name: country.name.official,
                 area: country.area,
                 population: country.population,
