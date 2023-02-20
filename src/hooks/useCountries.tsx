@@ -1,9 +1,7 @@
-import React from 'react'
-import { getCountries } from '../components/services/countries'
+import React from "react";
+import { getCountries } from "../services/countries";
 
-const allCountries = await getCountries()
+const allCountries = await getCountries();
 export default async function useCountries() {
-  return (
-    <div>useCountries</div>
-  )
+  return <div>useCountries</div>;
 }

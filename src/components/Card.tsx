@@ -13,7 +13,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import countryOne from "../mocks/countryOne.json";
-import { getCountries } from "./services/countries";
+import { getCountries } from "../services/countries";
 
 const InnerOne = () => {
   const { name, population, area } = countryOne;
