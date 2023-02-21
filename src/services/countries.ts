@@ -17,7 +17,7 @@ export async function getCountries () {
         const responseData = await response.json()
         await responseData.map((country:any):any => {
             const newCountry:CountryResponseProps = {
-                name: country.name.official,
+                name: country.name.common,
                 area: country.area,
                 population: country.population,
                 flag: {
