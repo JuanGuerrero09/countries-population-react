@@ -10,10 +10,10 @@ export const GameContext = createContext(null as any);
 
 
 export function GameProvider({ children }: Props) {
-  const { firstCountry, secondCountry, setRoundCounter, question, handleQuestion } = useGame();
+  const { firstCountry, secondCountry, setCurrentScore, question, handleQuestion, handleRestart, gameOver } = useGame();
   return (
     <GameContext.Provider
-      value={{ firstCountry, secondCountry, setRoundCounter, question, handleQuestion }}
+      value={{ firstCountry, secondCountry, setCurrentScore, question, handleQuestion, handleRestart, gameOver }}
     >
       {children}
     </GameContext.Provider>

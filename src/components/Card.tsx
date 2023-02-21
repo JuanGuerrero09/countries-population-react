@@ -14,20 +14,10 @@ type InnerValuesParams = {
   valueType: string;
 };
 
-const InnerOne = ({ value, valueType }: InnerValuesParams) => {
-  return (
-    <div className="textCard flex flex-col items-center font-semibold">
-      <Text color="blue.600" fontSize="3xl">
-        {value}
-      </Text>
-      <Text fontSize="xl">{valueType}</Text>
-    </div>
-  );
-};
-const InnerTwo = ({ valueType }: InnerValuesParams) => {
+const GameButtons = () => {
   const { handleQuestion } = useContext(GameContext);
   return (
-    <div className="textCard flex flex-col items-center font-semibold">
+    <>
       <ButtonGroup spacing="2">
         <Button
           value="less"
@@ -46,13 +36,46 @@ const InnerTwo = ({ valueType }: InnerValuesParams) => {
           More
         </Button>
       </ButtonGroup>
+    </>
+  );
+};
+
+const RestartButton = () => {
+  const {handleRestart} = useContext(GameContext)
+  return (
+    <Button className="mb-2" color="white" variant="solid" colorScheme="green" onClick={handleRestart}>
+      Restart Game
+    </Button>
+  );
+};
+
+const InnerOne = ({ value, valueType }: InnerValuesParams) => {
+  return (
+    <div className="textCard flex flex-col items-center font-semibold">
+      <Text color="blue.600" fontSize="3xl">
+        {value}
+      </Text>
       <Text fontSize="xl">{valueType}</Text>
+    </div>
+  );
+};
+const InnerTwo = ({ valueType }: InnerValuesParams) => {
+  const { gameOver } = useContext(GameContext);
+  return (
+    <div className="textCard flex flex-col items-center font-semibold">
+      {gameOver
+      ?<RestartButton/> 
+      :<GameButtons />
+      }
+      {!gameOver && 
+      <Text fontSize="xl">{valueType}</Text>
+      }
     </div>
   );
 };
 
 export default function Card({ country, type }: any) {
-  const { name, flags } = country;
+  const { name, flag } = country;
   const { question } = useContext(GameContext);
   const value = country[question];
   let valueType = "";
@@ -65,23 +88,30 @@ export default function Card({ country, type }: any) {
   return (
     <>
       <CardEl
+        minH="sm"
         maxW="sm"
-        className="shadow-inner mt-2"
+        className="shadow-inner mt-2 flex flex-col justify-between"
         border="1px"
         borderColor="gray.300"
       >
-        <Heading className="flex justify-center p-1" size="lg">
-          {name.official}
-        </Heading>
-        <Text className="flex justify-center" fontSize="lg" as="b">
-          Has
-        </Text>
-        <Image src={flags.svg} alt={flags.alt} borderRadius="lg" />
-        {type === "one" ? (
-          <InnerOne value={value} valueType={valueType} />
-        ) : (
-          <InnerTwo valueType={valueType} />
-        )}
+        <div className="head">
+          <Heading className="flex justify-center p-1" size="lg">
+            {name}
+          </Heading>
+          <Text className="flex justify-center" fontSize="lg" as="b">
+            Has
+          </Text>
+        </div>
+
+        <Image maxH="56" src={flag.src} alt={flag.alt} borderRadius="lg" />
+
+        <div className="bottom mt-2">
+          {type === "one" ? (
+            <InnerOne value={value} valueType={valueType} />
+          ) : (
+            <InnerTwo valueType={valueType} />
+          )}
+        </div>
       </CardEl>
     </>
   );
