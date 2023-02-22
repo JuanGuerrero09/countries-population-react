@@ -29,6 +29,7 @@ export function useGame() {
   const [gameOver, setGameOver] = useState<boolean>(false);
   const lastCountry = useRef(secondCountry);
   const [currentScore, setCurrentScore] = useState(0);
+  const [maxScore, setMaxScore] = useState(0);
 
   const possibleQuestions = ["area", "population"];
   const [question, setQuestion] = useState<string>(
@@ -55,7 +56,10 @@ export function useGame() {
     // setSecondCountry(newCountry)
   };
 
-  const handleRestart = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleRestart = () => {
+    if (maxScore < currentScore) {
+      setMaxScore(currentScore)
+    }
     const newCountryOne = getRandomCountry();
     const newCountryTwo = getRandomCountry();
     const newQuestion = getRandomElement(possibleQuestions);
@@ -70,7 +74,8 @@ export function useGame() {
     firstCountry,
     secondCountry,
     question,
-    setCurrentScore,
+    currentScore,
+    maxScore,
     handleQuestion,
     handleRestart,
     gameOver,

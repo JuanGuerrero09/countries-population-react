@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import { ToggleMode } from "./components/ToggleModeBtn";
 import { GameProvider } from "./context/GameContext";
+import Scores from "./components/Scores";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <GameProvider>
         <Header />
         <Main />
+        <Scores />
         <ToggleMode />
       </GameProvider>
     </div>
