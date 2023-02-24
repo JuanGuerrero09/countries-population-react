@@ -8,7 +8,9 @@ import {
 } from "@chakra-ui/react";
 import { GameContext } from "../context/GameContext";
 import { useContext } from "react";
-import { getCountries } from "../services/countries";
+// @ts-ignore
+import numberSeparator from "number-separator"
+
 type InnerValuesParams = {
   value?: number | string;
   valueType: string;
@@ -53,7 +55,7 @@ const InnerOne = ({ value, valueType }: InnerValuesParams) => {
   return (
     <div className="textCard flex flex-col items-center font-semibold">
       <Text color="blue.600" fontSize="3xl">
-        {value}
+        {numberSeparator(value)}
       </Text>
       <Text fontSize="xl">{valueType}</Text>
     </div>
