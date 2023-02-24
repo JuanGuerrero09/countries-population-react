@@ -1,12 +1,6 @@
-import CountryTwoData from "../mocks/countryOne.json";
-import CountryOneData from "../mocks/countryTwo.json";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { getRandomElement } from "../services/getRandomElement";
-import { getCountries } from "../services/countries";
 import getRandomCountry from "../services/getRandomCountry";
-
-// inicie con 3 countries
-// si la respuesta es correcta trae una nueva y mueve las que están
 
 type CountryInfo = any;
 
@@ -20,6 +14,7 @@ type CountryInfo = any;
 
 const initialCountryOne = getRandomCountry();
 const initialCountryTwo = getRandomCountry();
+
 
 export function useGame() {
   const [firstCountry, setFirstCountry] =
@@ -53,12 +48,11 @@ export function useGame() {
     if (!isAnswerCorrect) {
       setGameOver(true);
     }
-    // setSecondCountry(newCountry)
   };
 
   const handleRestart = () => {
     if (maxScore < currentScore) {
-      setMaxScore(currentScore)
+      setMaxScore(currentScore);
     }
     const newCountryOne = getRandomCountry();
     const newCountryTwo = getRandomCountry();
