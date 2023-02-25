@@ -16,6 +16,7 @@ The stack for this project consisted in:
 - [Chakra UI](https://chakra-ui.com)
 - Vite
 - API: [Rest Countries API](https://restcountries.com/)
+- Deployed in [Vercel](https://vercel.com)
 
 ## User stories
 
