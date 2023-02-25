@@ -19,12 +19,12 @@ The stack for this project consisted in:
 
 ## User stories
 
-- [ x ] The game shows an UI with a Header, two Card components and a Footer
-- [ x ] The game question with the mocks data works by press the More or Less buttons
-- [ x ] The game shows the next country and the second one moves to the first Card
-- [ x ] The game switches between area and population for the questions
-- [ x ] The game fetch data and displays it in the first reload
-- [ x ] The game works and can keep the count
+- [x] The game shows an UI with a Header, two Card components and a Footer
+- [x] The game question with the mocks data works by press the More or Less buttons
+- [x] The game shows the next country and the second one moves to the first Card
+- [x] The game switches between area and population for the questions
+- [x] The game fetch data and displays it in the first reload
+- [x] The game works and can keep the count
 
 ## Current To do's
 
