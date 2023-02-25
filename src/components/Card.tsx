@@ -91,12 +91,13 @@ export default function Card({ country, type }: any) {
     <>
       <CardEl
         minH="sm"
-        maxW="sm"
-        className="shadow-inner mt-2 flex flex-col justify-between"
+        maxW="100%"
+        className="shadow-inner mt-2 flex flex-col justify-between max-w-full w-96"
         border="1px"
         borderColor="gray.300"
+        padding={2}
       >
-        <div className="head">
+        <div className="head p-2">
           <Heading className="flex justify-center p-1" size="lg">
             {name}
           </Heading>
@@ -105,7 +106,9 @@ export default function Card({ country, type }: any) {
           </Text>
         </div>
 
+
         <Image maxH="56" src={flag.src} alt={flag.alt} borderRadius="lg" />
+
 
         <div className="bottom mt-2">
           {type === "one" ? (
