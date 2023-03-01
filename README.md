@@ -29,7 +29,8 @@ The stack for this project consisted in:
 
 ## Current To do's
 
-- [ ] Change logo
+- [x] Change logo
+- [x] Replace all the useState for useReducer to manage the global state
 - [ ] Fix the changes in height (problem with the title height)
 - [ ] Fix the color of the scores (problem in production with tailwind classes)
 
