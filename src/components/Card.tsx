@@ -9,7 +9,7 @@ import {
 import { GameContext } from "../context/GameContext";
 import { useContext } from "react";
 // @ts-ignore
-import numberSeparator from "number-separator"
+import numberSeparator from "number-separator";
 
 type InnerValuesParams = {
   value?: number | string;
@@ -17,7 +17,35 @@ type InnerValuesParams = {
 };
 
 const GameButtons = () => {
-  const { handleQuestion } = useContext(GameContext);
+  const {
+    firstCountry,
+    secondCountry,
+    question,
+    currentScore,
+    correctAnswerSelected,
+    wrongAnswerSelected,
+    gameOver,
+    maxScore,
+  } = useContext(GameContext);
+  function handleQuestion(event: React.MouseEvent<HTMLButtonElement>) {
+    const answer = (event.target as HTMLButtonElement).value;
+    const isAnswerCorrect =
+      (firstCountry[question] >= secondCountry[question] &&
+        answer === "less") ||
+      (firstCountry[question] <= secondCountry[question] && answer === "more");
+    console.log(isAnswerCorrect);
+    if (isAnswerCorrect) {
+      correctAnswerSelected({
+        firstCountry,
+        secondCountry,
+        currentScore,
+        question,
+      });
+    }
+    if (!isAnswerCorrect) {
+      wrongAnswerSelected({ gameOver, currentScore, maxScore });
+    }
+  }
   return (
     <>
       <ButtonGroup spacing="2">
@@ -43,9 +71,18 @@ const GameButtons = () => {
 };
 
 const RestartButton = () => {
-  const {handleRestart} = useContext(GameContext)
+  const { resetGame } = useContext(GameContext);
+  function handleRestart() {
+    resetGame();
+  }
   return (
-    <Button className="mb-2" color="white" variant="solid" colorScheme="green" onClick={handleRestart}>
+    <Button
+      className="mb-2"
+      color="white"
+      variant="solid"
+      colorScheme="green"
+      onClick={handleRestart}
+    >
       Restart Game
     </Button>
   );
@@ -65,13 +102,8 @@ const InnerTwo = ({ valueType }: InnerValuesParams) => {
   const { gameOver } = useContext(GameContext);
   return (
     <div className="textCard flex flex-col items-center font-semibold">
-      {gameOver
-      ?<RestartButton/> 
-      :<GameButtons />
-      }
-      {!gameOver && 
-      <Text fontSize="xl">{valueType}</Text>
-      }
+      {gameOver ? <RestartButton /> : <GameButtons />}
+      {!gameOver && <Text fontSize="xl">{valueType}</Text>}
     </div>
   );
 };
@@ -106,9 +138,7 @@ export default function Card({ country, type }: any) {
           </Text>
         </div>
 
-
         <Image maxH="56" src={flag.src} alt={flag.alt} borderRadius="lg" />
-
 
         <div className="bottom mt-2">
           {type === "one" ? (
